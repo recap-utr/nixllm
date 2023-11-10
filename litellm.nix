@@ -34,7 +34,7 @@ python3Packages.buildPythonApplication rec {
     uvicorn
     fastapi
     tomli
-    appdirs
+    # appdirs (already in base)
     tomli-w
     backoff
     pyyaml
