@@ -19,6 +19,7 @@ python3Packages.buildPythonApplication rec {
   ];
 
   propagatedBuildInputs = with python3Packages; [
+    # base: https://github.com/BerriAI/litellm/blob/main/pyproject.toml
     openai
     python-dotenv
     tiktoken
@@ -29,6 +30,14 @@ python3Packages.buildPythonApplication rec {
     certifi
     appdirs
     aiohttp
+    # proxy: https://github.com/BerriAI/litellm/blob/main/litellm/proxy/proxy_server.py
+    uvicorn
+    fastapi
+    tomli
+    appdirs
+    tomli-w
+    backoff
+    pyyam
   ];
 
   doCheck = false;
