@@ -35,6 +35,7 @@
         packages = {
           ollama = pkgs.callPackage ./ollama.nix {};
           localai = pkgs.callPackage ./localai.nix {};
+          local-ai = self'.packages.localai;
           litellm = pkgs.callPackage ./litellm.nix {};
         };
       };
