@@ -37,7 +37,7 @@ python3Packages.buildPythonApplication rec {
     appdirs
     tomli-w
     backoff
-    pyyam
+    pyyaml
   ];
 
   doCheck = false;
