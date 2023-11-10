@@ -21,8 +21,9 @@ stdenv.mkDerivation rec {
   dontConfigure = true;
 
   installPhase = ''
-    mkdir -p $out/bin
+    runHook preInstall
     install -m755 -D $src $out/bin/localai
+    runHook postInstall
   '';
 
   meta = {
