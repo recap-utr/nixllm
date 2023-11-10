@@ -18,6 +18,18 @@
         self',
         ...
       }: {
+        apps = {
+          litellm = {
+            type = "app";
+            program = pkgs.writeShellApplication {
+              name = "litellm-app";
+              runtimeInputs = with self'.packages; [ollama];
+              text = ''
+                exec ${lib.getExe self'.packages.litellm} "$@
+              '';
+            };
+          };
+        };
         packages = {
           ollama = pkgs.callPackage ./ollama.nix {};
           localai = pkgs.callPackage ./localai.nix {};
