@@ -1,18 +1,28 @@
 {
-  callPackage,
+  fetchurl,
   lib,
   stdenv,
   autoPatchelfHook,
-  generated,
   avxVersion ? "avx512",
 }: let
   inherit (stdenv.hostPlatform) system;
   pname = "local-ai";
-  drv = generated."${pname}-${system}-${avxVersion}";
+  version = "1.39.0";
+  srcs = {
+    "x86_64-linux" = fetchurl {
+      url = "https://github.com/mudler/LocalAI/releases/download/v${version}/local-ai-${avxVersion}-Linux-x86_64";
+      hash = "";
+    };
+    "x86_64-darwin" = fetchurl {
+      url = "https://github.com/mudler/LocalAI/releases/download/v${version}/local-ai-${avxVersion}-Darwin-x86_64";
+      hash = "";
+    };
+  };
 in
   stdenv.mkDerivation {
-    inherit pname;
-    inherit (drv) src version;
+    inherit pname version;
+
+    src = srcs.${system};
 
     nativeBuildInputs = lib.optional stdenv.isLinux autoPatchelfHook;
 
@@ -33,6 +43,6 @@ in
       mainProgram = "local-ai";
       platforms = ["x86_64-linux" "x86_64-darwin"];
       license = lib.licenses.mit;
-      changelog = "https://github.com/mudler/LocalAI/releases/tag/v${drv.version}";
+      changelog = "https://github.com/mudler/LocalAI/releases/tag/v${version}";
     };
   }
