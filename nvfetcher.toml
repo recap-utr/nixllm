@@ -1,0 +1,33 @@
+[ollama-x86_64-linux]
+src.github = "jmorganca/ollama"
+fetch.url = "https://github.com/jmorganca/ollama/releases/download/v$ver/ollama-linux-amd64"
+src.prefix = "v"
+
+[ollama-aarch64-linux]
+src.github = "jmorganca/ollama"
+fetch.url = "https://github.com/jmorganca/ollama/releases/download/v$ver/ollama-linux-arm64"
+src.prefix = "v"
+
+[ollama-x86_64-darwin]
+src.github = "jmorganca/ollama"
+fetch.url = "https://github.com/jmorganca/ollama/releases/download/v$ver/ollama-darwin"
+src.prefix = "v"
+
+[ollama-aarch64-darwin]
+src.github = "jmorganca/ollama"
+fetch.url = "https://github.com/jmorganca/ollama/releases/download/v$ver/ollama-darwin"
+src.prefix = "v"
+
+[localai-x86_64-linux-avx512]
+src.github = "mudler/LocalAI"
+fetch.url = "https://github.com/mudler/LocalAI/releases/download/v$ver/local-ai-avx512-Linux-x86_64"
+src.prefix = "v"
+
+[localai-x86_64-darwin-avx512]
+src.github = "mudler/LocalAI"
+fetch.url = "https://github.com/mudler/LocalAI/releases/download/v$ver/local-ai-avx512-Darwin-x86_64"
+src.prefix = "v"
+
+[litellm]
+src.pypi = "litellm"
+fetch.pypi = "litellm"

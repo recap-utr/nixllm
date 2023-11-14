@@ -1,29 +1,19 @@
 {
-  system,
-  fetchurl,
+  callPackage,
   lib,
   stdenv,
   autoPatchelfHook,
+  generated,
 }: let
-  platforms = {
-    x86_64-linux = "linux-amd64";
-    aarch64-linux = "linux-arm64";
-    x86_64-darwin = "darwin";
-    aarch64-darwin = "darwin";
-  };
-  platform = platforms.${system};
+  inherit (stdenv.hostPlatform) system;
+  pname = "ollama";
+  drv = generated."${pname}-${system}";
 in
-  stdenv.mkDerivation rec {
-    pname = "ollama";
-    version = "0.1.9";
-    src = fetchurl {
-      url = "https://github.com/jmorganca/ollama/releases/download/v${version}/${pname}-${platform}";
-      hash = "sha256-ghEkGZN4uhKkHUCXTiTzllerbg+kNdWQznaX7aPsLAU=";
-    };
+  stdenv.mkDerivation {
+    inherit pname;
+    inherit (drv) src version;
 
-    nativeBuildInputs = [
-      autoPatchelfHook
-    ];
+    nativeBuildInputs = lib.optional stdenv.isLinux autoPatchelfHook;
 
     dontUnpack = true;
     dontBuild = true;
@@ -40,8 +30,8 @@ in
       downloadPage = "https://github.com/jmorganca/ollama/releases";
       description = "Get up and running with Llama 2 and other large language models locally";
       mainProgram = "ollama";
-      platforms = builtins.attrNames platforms;
+      platforms = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
       license = lib.licenses.mit;
-      changelog = "https://github.com/jmorganca/ollama/releases/tag/v${version}";
+      changelog = "https://github.com/jmorganca/ollama/releases/tag/v${drv.version}";
     };
   }

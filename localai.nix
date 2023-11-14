@@ -1,28 +1,20 @@
 {
-  system,
-  fetchurl,
+  callPackage,
   lib,
   stdenv,
   autoPatchelfHook,
+  generated,
   avxVersion ? "avx512",
 }: let
-  platforms = {
-    x86_64-linux = "Linux-x86_64";
-    x86_64-darwin = "Darwin_x86_64";
-  };
-  platform = platforms.${system};
+  inherit (stdenv.hostPlatform) system;
+  pname = "local-ai";
+  drv = generated."${pname}-${system}-${avxVersion}";
 in
-  stdenv.mkDerivation rec {
-    pname = "local-ai";
-    version = "1.40.0";
-    src = fetchurl {
-      url = "https://github.com/mudler/LocalAI/releases/download/v${version}/${pname}-${avxVersion}-${platform}";
-      hash = "sha256-ITdEn96zy3P9GPikOujGb4/AzsESWVOn5c9vrh+LEgY=";
-    };
+  stdenv.mkDerivation {
+    inherit pname;
+    inherit (drv) src version;
 
-    nativeBuildInputs = [
-      autoPatchelfHook
-    ];
+    nativeBuildInputs = lib.optional stdenv.isLinux autoPatchelfHook;
 
     dontUnpack = true;
     dontBuild = true;
@@ -34,13 +26,13 @@ in
       runHook postInstall
     '';
 
-    meta = with lib; {
+    meta = {
       homepage = "https://localai.io/";
       downloadPage = "https://github.com/mudler/LocalAI/releases";
       description = "Get up and running with Llama 2 and other large language models locally";
       mainProgram = "local-ai";
-      platforms = builtins.attrNames platforms;
+      platforms = ["x86_64-linux" "x86_64-darwin"];
       license = lib.licenses.mit;
-      changelog = "https://github.com/mudler/LocalAI/releases/tag/v${version}";
+      changelog = "https://github.com/mudler/LocalAI/releases/tag/v${drv.version}";
     };
   }

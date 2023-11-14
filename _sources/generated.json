@@ -1,0 +1,107 @@
+{
+    "litellm": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "litellm",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-9nw97AzFYI7UkzwCB01BXO8CySyaDIjM2AP+kXKKVLE=",
+            "type": "url",
+            "url": "https://pypi.org/packages/source/l/litellm/litellm-1.0.0.tar.gz"
+        },
+        "version": "1.0.0"
+    },
+    "localai-x86_64-darwin-avx512": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "localai-x86_64-darwin-avx512",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-MRoiKFwAZEoKOf+nOMVl+75+ceSKrm1VnuwWK9n1/eY=",
+            "type": "url",
+            "url": "https://github.com/mudler/LocalAI/releases/download/v1.40.0/local-ai-avx512-Darwin-x86_64"
+        },
+        "version": "1.40.0"
+    },
+    "localai-x86_64-linux-avx512": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "localai-x86_64-linux-avx512",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-ITdEn96zy3P9GPikOujGb4/AzsESWVOn5c9vrh+LEgY=",
+            "type": "url",
+            "url": "https://github.com/mudler/LocalAI/releases/download/v1.40.0/local-ai-avx512-Linux-x86_64"
+        },
+        "version": "1.40.0"
+    },
+    "ollama-aarch64-darwin": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "ollama-aarch64-darwin",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-htTv84CJ++xZxQc1NGd5x2D637xdaZStSRVi323Exxg=",
+            "type": "url",
+            "url": "https://github.com/jmorganca/ollama/releases/download/v0.1.9/ollama-darwin"
+        },
+        "version": "0.1.9"
+    },
+    "ollama-aarch64-linux": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "ollama-aarch64-linux",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-J6NJ+UrVdcU/sg/YxOA53vkxLVgQ36nVm+sMMBzZxQc=",
+            "type": "url",
+            "url": "https://github.com/jmorganca/ollama/releases/download/v0.1.9/ollama-linux-arm64"
+        },
+        "version": "0.1.9"
+    },
+    "ollama-x86_64-darwin": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "ollama-x86_64-darwin",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-htTv84CJ++xZxQc1NGd5x2D637xdaZStSRVi323Exxg=",
+            "type": "url",
+            "url": "https://github.com/jmorganca/ollama/releases/download/v0.1.9/ollama-darwin"
+        },
+        "version": "0.1.9"
+    },
+    "ollama-x86_64-linux": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "ollama-x86_64-linux",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-ghEkGZN4uhKkHUCXTiTzllerbg+kNdWQznaX7aPsLAU=",
+            "type": "url",
+            "url": "https://github.com/jmorganca/ollama/releases/download/v0.1.9/ollama-linux-amd64"
+        },
+        "version": "0.1.9"
+    }
+}
