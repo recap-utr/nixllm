@@ -3,6 +3,11 @@
 Nix wrapper for running LLMs behind an OpenAI-compatible API proxy.
 
 ## Usage
+
+### LiteLLM
+
+```shell
+CUDA_VISIBLE_DEVICES=7 nix run .#litellm -- --model ollama/llama2:13b --port 50900 --num_workers 8 --add_function_to_prompt
 ```
 
 ### LocalAI
