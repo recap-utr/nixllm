@@ -1,15 +1,20 @@
 # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/development/python-modules/litellm/default.nix
 {
   lib,
-  callPackage,
+  fetchPypi,
   python3Packages,
-  generated,
 }: let
-  drv = generated.litellm;
+  pname = "litellm";
+  version = "0.13.2";
 in
   python3Packages.buildPythonApplication {
-    inherit (generated.litellm) pname version src;
+    inherit pname version;
     pyproject = true;
+
+    src = fetchPypi {
+      inherit pname version;
+      hash = "sha256-MZB7T0AU1uRCNxzREszK2VN4iViIHkQh7XsIfSgsA6Q=";
+    };
 
     nativeBuildInputs = with python3Packages; [
       poetry-core
@@ -45,6 +50,6 @@ in
       downloadPage = "https://pypi.org/project/litellm/#history";
       license = lib.licenses.mit;
       mainProgram = "litellm";
-      changelog = "https://github.com/BerriAI/litellm/releases/tag/v${drv.version}";
+      changelog = "https://github.com/BerriAI/litellm/releases/tag/v${version}";
     };
   }

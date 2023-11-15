@@ -19,9 +19,7 @@
         system,
         self',
         ...
-      }: let
-        generated = pkgs.callPackage ./_sources/generated.nix {};
-      in {
+      }: {
         apps = {
           litellm = {
             type = "app";
@@ -35,10 +33,10 @@
           };
         };
         packages = {
-          ollama = pkgs.callPackage ./ollama.nix {inherit generated;};
-          localai = pkgs.callPackage ./localai.nix {};
-          local-ai = self'.packages.localai;
-          litellm = pkgs.callPackage ./litellm.nix {inherit generated;};
+          ollama = pkgs.callPackage ./ollama.nix {};
+          local-ai = pkgs.callPackage ./local-ai.nix {};
+          localai = self'.packages.local-ai;
+          litellm = pkgs.callPackage ./litellm.nix {};
         };
       };
     };

@@ -1,17 +1,40 @@
 {
-  callPackage,
+  fetchurl,
   lib,
   stdenv,
   autoPatchelfHook,
-  generated,
 }: let
   inherit (stdenv.hostPlatform) system;
   pname = "ollama";
-  drv = generated."${pname}-${system}";
+  version = "0.1.9";
+  repo = "https://github.com/jmorganca/ollama";
+  srcs = {
+    x86_64-linux = {
+      url = "${repo}/releases/download/v${version}/${pname}-linux-amd64";
+      hash = "sha256-ghEkGZN4uhKkHUCXTiTzllerbg+kNdWQznaX7aPsLAU=";
+    };
+    aarch64-linux = {
+      url = "${repo}/releases/download/v${version}/${pname}-linux-arm64";
+      hash = "sha256-J6NJ+UrVdcU/sg/YxOA53vkxLVgQ36nVm+sMMBzZxQc=";
+    };
+    x86_64-darwin = {
+      url = "${repo}/releases/download/v${version}/${pname}-darwin";
+      hash = "sha256-htTv84CJ++xZxQc1NGd5x2D637xdaZStSRVi323Exxg=";
+    };
+    aarch64-darwin = {
+      url = "${repo}/releases/download/v${version}/${pname}-darwin";
+      hash = "sha256-htTv84CJ++xZxQc1NGd5x2D637xdaZStSRVi323Exxg=";
+    };
+  };
 in
   stdenv.mkDerivation {
-    inherit pname;
-    inherit (drv) src version;
+    inherit pname version;
+
+    passthru = {
+      inherit srcs;
+    };
+
+    src = fetchurl srcs.${system};
 
     nativeBuildInputs = lib.optional stdenv.isLinux autoPatchelfHook;
 
@@ -27,11 +50,11 @@ in
 
     meta = {
       homepage = "https://ollama.ai/";
-      downloadPage = "https://github.com/jmorganca/ollama/releases";
+      downloadPage = "${repo}/releases";
       description = "Get up and running with Llama 2 and other large language models locally";
-      mainProgram = "ollama";
-      platforms = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
+      mainProgram = pname;
+      platforms = builtins.attrNames srcs;
       license = lib.licenses.mit;
-      changelog = "https://github.com/jmorganca/ollama/releases/tag/v${drv.version}";
+      changelog = "${repo}/releases/tag/v${version}";
     };
   }
