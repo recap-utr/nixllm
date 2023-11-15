@@ -1,0 +1,27 @@
+- url: file://models/llama2.yaml
+  name: llama2-7b
+  license: other
+  urls:
+    - https://huggingface.co/TheBloke/Llama-2-7B-chat-GGUF/blob/main/llama-2-7b-chat.Q4_K_M.gguf
+  files:
+    - filename: "llama-2-7b-chat.Q4_K_M.gguf"
+      sha256: "08a5566d61d7cb6b420c3e4387a39e0078e1f2fe5f055f3a03887385304d4bfa"
+      uri: "https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q4_K_M.gguf"
+- url: file://models/llama2.yaml
+  name: llama2-13b
+  license: other
+  urls:
+    - https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF/blob/main/llama-2-13b-chat.Q4_K_M.gguf
+  files:
+    - filename: "llama-2-13b-chat.Q4_K_M.gguf"
+      sha256: "7ddfe27f61bf994542c22aca213c46ecbd8a624cca74abff02a7b5a8c18f787f"
+      uri: "https://huggingface.co/TheBloke/Llama-2-13B-Chat-GGUF/resolve/main/llama-2-13b-chat.Q4_K_M.gguf"
+- url: file://models/llama2.yaml
+  name: llama2-70b
+  license: other
+  urls:
+    - https://huggingface.co/TheBloke/Llama-2-70B-chat-GGUF/blob/main/llama-2-70b-chat.Q4_K_M.gguf
+  files:
+    - filename: "llama-2-70b-chat.Q4_K_M.gguf"
+      sha256: "c7e817ae9c84191ccfc57141e839cb1b1cb61822cd299e76d02ec49fd6fa3c3e"
+      uri: "https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGUF/resolve/main/llama-2-70b-chat.Q4_K_M.gguf"
