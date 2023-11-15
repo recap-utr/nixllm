@@ -36,12 +36,24 @@
               '';
             };
           };
+          functionary = {
+            type = "app";
+            program = pkgs.writeShellApplication {
+              name = "functionary-app";
+              text = ''
+                cd ${self'.packages.functionary.src}
+                exec ${lib.getExe' self'.packages.functionary-py "python"} server.py "$@"
+              '';
+            };
+          };
         };
         packages = {
           ollama = pkgs.callPackage ./ollama.nix {};
           local-ai = pkgs.callPackage ./local-ai.nix {};
           localai = self'.packages.local-ai;
           litellm = pkgs.callPackage ./litellm.nix {};
+          functionary = pkgs.callPackage ./functionary.nix {};
+          functionary-py = pkgs.python3.withPackages (ps: [self'.packages.functionary]);
           llama-cpp = pkgs.callPackage ./llama-cpp-python.nix {
             llama-cpp = llama-cpp.packages.${system}.default;
           };
