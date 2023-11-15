@@ -5,7 +5,7 @@
   python3Packages,
 }: let
   pname = "litellm";
-  version = "1.0.0";
+  version = "0.13.2";
 in
   python3Packages.buildPythonApplication {
     inherit pname version;
@@ -13,7 +13,7 @@ in
 
     src = fetchPypi {
       inherit pname version;
-      hash = "sha256-9nw97AzFYI7UkzwCB01BXO8CySyaDIjM2AP+kXKKVLE=";
+      hash = "sha256-MZB7T0AU1uRCNxzREszK2VN4iViIHkQh7XsIfSgsA6Q=";
     };
 
     nativeBuildInputs = with python3Packages; [
