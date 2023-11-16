@@ -24,6 +24,8 @@ app = FastAPI(title="Functionary API")
 
 
 @app.post("/v1/chat/completions")
+# CUSTOM ROUTE
+@app.post("/chat/completions")
 async def chat_endpoint(chat_input: ChatInput):
     request_id = str(uuid.uuid4())
     if not chat_input.stream:
