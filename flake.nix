@@ -65,6 +65,7 @@
               # exec ${lib.getExe pkgs.nixgl.auto.nixGLDefault} ${lib.getExe' self'.packages.functionary "python"} server.py "$@"
               text = ''
                 export LD_LIBRARY_PATH=${lib.makeLibraryPath [pkgs.stdenv.cc.cc "/run/opengl-driver"]};
+                cd "$(mktemp -d)";
                 ln -s ${functionary.src}/functionary functionary;
                 cp ${./functionary_server.py} server.py;
                 exec ${lib.getExe' self'.packages.functionary "python"} server.py "$@"
