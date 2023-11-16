@@ -7,13 +7,17 @@
       url = "github:ggerganov/llama.cpp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs @ {
     self,
     nixpkgs,
     flake-parts,
     systems,
-    llama-cpp,
+    nixgl,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
@@ -24,7 +28,25 @@
         system,
         self',
         ...
-      }: {
+      }: let
+        cudaSupport = system == "x86_64-linux";
+        llamacppAttr =
+          if cudaSupport
+          then "cuda"
+          else "default";
+        llama-cpp = inputs.llama-cpp.packages.${system}.${llamacppAttr};
+        python = pkgs.python3;
+        vllm = python.pkgs.callPackage ./vllm.nix {};
+        functionary = python.pkgs.callPackage ./functionary.nix {};
+      in {
+        _module.args.pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            inherit cudaSupport;
+            allowUnfree = true;
+          };
+          overlays = [nixgl.overlay];
+        };
         apps = {
           litellm = {
             type = "app";
@@ -40,9 +62,12 @@
             type = "app";
             program = pkgs.writeShellApplication {
               name = "functionary-app";
+              # exec ${lib.getExe pkgs.nixgl.auto.nixGLDefault} ${lib.getExe' self'.packages.functionary "python"} server.py "$@"
               text = ''
-                cd ${self'.packages.functionary.src}
-                exec ${lib.getExe' self'.packages.functionary-py "python"} server.py "$@"
+                export LD_LIBRARY_PATH=${lib.makeLibraryPath [pkgs.stdenv.cc.cc "/run/opengl-driver"]};
+                ln -s ${functionary.src}/functionary functionary;
+                cp ${./functionary_server.py} server.py;
+                exec ${lib.getExe' self'.packages.functionary "python"} server.py "$@"
               '';
             };
           };
@@ -52,17 +77,29 @@
           local-ai = pkgs.callPackage ./local-ai.nix {};
           localai = self'.packages.local-ai;
           litellm = pkgs.callPackage ./litellm.nix {};
-          functionary = pkgs.callPackage ./functionary.nix {};
-          functionary-py = pkgs.python3.withPackages (ps: [self'.packages.functionary]);
+          functionary = pkgs.python3.withPackages (ps: [
+            functionary
+            # vllm
+          ]);
           llama-cpp = pkgs.callPackage ./llama-cpp-python.nix {
-            llama-cpp = llama-cpp.packages.${system}.default;
+            inherit llama-cpp;
           };
-          llama-cpp-cuda = pkgs.callPackage ./llama-cpp-python.nix {
-            llama-cpp = llama-cpp.packages.${system}.cuda;
+          upload = pkgs.writeShellApplication {
+            name = "upload";
+            text = ''
+              exec ${lib.getExe pkgs.rsync} \
+                --progress \
+                --archive \
+                --delete \
+                --exclude-from ".gitignore" \
+                --exclude ".git" \
+                ./ \
+                wi2gpu:recap-utr/nixllm
+            '';
           };
-          llama-cpp-opencl = pkgs.callPackage ./llama-cpp-python.nix {
-            llama-cpp = llama-cpp.packages.${system}.opencl;
-          };
+        };
+        devShells.default = pkgs.mkShell {
+          packages = with self'.packages; [upload];
         };
       };
     };
