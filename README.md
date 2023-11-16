@@ -17,3 +17,9 @@ CUDA_VISIBLE_DEVICES=7 nix run .#localai -- --address=0.0.0.0:50900 --galleries=
 # download models for the first time
 curl http://IP:50910/models/apply -H "Content-Type: application/json" -d '{"id": "nixllm@llama2-13b"}'
 ```
+
+### Functionary
+
+```shell
+CUDA_VISIBLE_DEVICES=7 nix run .#functionary -- --port 50900 --device cuda
+```
