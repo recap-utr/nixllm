@@ -5,7 +5,7 @@
   python3Packages,
 }: let
   pname = "litellm";
-  version = "0.13.2";
+  version = "1.7.12";
 in
   python3Packages.buildPythonApplication {
     inherit pname version;
@@ -13,34 +13,36 @@ in
 
     src = fetchPypi {
       inherit pname version;
-      hash = "sha256-MZB7T0AU1uRCNxzREszK2VN4iViIHkQh7XsIfSgsA6Q=";
+      hash = "sha256-mpPAx2tNqDYnINlCVV6/A7A1ySIVVjnWIU+O0OmdxHo=";
     };
 
     nativeBuildInputs = with python3Packages; [
       poetry-core
     ];
 
-    propagatedBuildInputs = with python3Packages; [
+    propagatedBuildInputs =
       # base: https://github.com/BerriAI/litellm/blob/main/pyproject.toml
-      openai
-      python-dotenv
-      tiktoken
-      importlib-metadata
-      tokenizers
-      click
-      jinja2
-      certifi
-      appdirs
-      aiohttp
+      (with python3Packages; [
+        openai
+        python-dotenv
+        tiktoken
+        importlib-metadata
+        tokenizers
+        click
+        jinja2
+        certifi
+        appdirs
+        aiohttp
+      ])
       # proxy: https://github.com/BerriAI/litellm/blob/main/litellm/proxy/proxy_server.py
-      uvicorn
-      fastapi
-      tomli
-      # appdirs (already in base)
-      tomli-w
-      backoff
-      pyyaml
-    ];
+      ++ (with python3Packages; [
+        uvicorn
+        fastapi
+        appdirs
+        backoff
+        pyyaml
+        rq
+      ]);
 
     doCheck = false;
 
