@@ -6,25 +6,22 @@
 }: let
   inherit (stdenv.hostPlatform) system;
   pname = "ollama";
-  version = "0.1.9";
+  version = "0.1.10";
   repo = "https://github.com/jmorganca/ollama";
-  srcs = {
+  srcs = rec {
     x86_64-linux = {
       url = "${repo}/releases/download/v${version}/${pname}-linux-amd64";
-      hash = "sha256-ghEkGZN4uhKkHUCXTiTzllerbg+kNdWQznaX7aPsLAU=";
+      hash = "sha256-FcC+R2RBU2wtFqDwbN8X1N4/8PaGwpFUtcxrx096t7M=";
     };
     aarch64-linux = {
       url = "${repo}/releases/download/v${version}/${pname}-linux-arm64";
-      hash = "sha256-J6NJ+UrVdcU/sg/YxOA53vkxLVgQ36nVm+sMMBzZxQc=";
+      hash = "sha256-1UsM9Pjtm6e8A7vgNcKt3HARCwu3NMCRVESjaMpD57k=";
     };
     x86_64-darwin = {
       url = "${repo}/releases/download/v${version}/${pname}-darwin";
-      hash = "sha256-htTv84CJ++xZxQc1NGd5x2D637xdaZStSRVi323Exxg=";
+      hash = "sha256-WgTWphms6TNTftfdvWAYfb6szQOrSyOe8/JKoR2Ran0=";
     };
-    aarch64-darwin = {
-      url = "${repo}/releases/download/v${version}/${pname}-darwin";
-      hash = "sha256-htTv84CJ++xZxQc1NGd5x2D637xdaZStSRVi323Exxg=";
-    };
+    aarch64-darwin = x86_64-darwin;
   };
 in
   stdenv.mkDerivation {
