@@ -6,20 +6,20 @@
 }: let
   inherit (stdenv.hostPlatform) system;
   pname = "ollama";
-  version = "0.1.10";
+  version = "0.1.12";
   repo = "https://github.com/jmorganca/ollama";
   srcs = rec {
     x86_64-linux = {
       url = "${repo}/releases/download/v${version}/${pname}-linux-amd64";
-      hash = "sha256-FcC+R2RBU2wtFqDwbN8X1N4/8PaGwpFUtcxrx096t7M=";
+      hash = "sha256-qJDWbDdiGu1THcd5X6YrKsG4vrzOh/VsXO81sCajrQ8=";
     };
     aarch64-linux = {
       url = "${repo}/releases/download/v${version}/${pname}-linux-arm64";
-      hash = "sha256-1UsM9Pjtm6e8A7vgNcKt3HARCwu3NMCRVESjaMpD57k=";
+      hash = "sha256-g0eydRJZQdjR8+hf0migeMoNQg+syLqPsQBGUdZ5UoQ=";
     };
     x86_64-darwin = {
       url = "${repo}/releases/download/v${version}/${pname}-darwin";
-      hash = "sha256-WgTWphms6TNTftfdvWAYfb6szQOrSyOe8/JKoR2Ran0=";
+      hash = "sha256-JjOznbRgnzpH3i+ElFTuJFlzpaw7LnJyIe+Gt2AoZeI=";
     };
     aarch64-darwin = x86_64-darwin;
   };
