@@ -35,7 +35,7 @@
           then "cuda"
           else "default";
         llama-cpp = inputs.llama-cpp.packages.${system}.${llamacppAttr};
-        python = pkgs.python3;
+        python = pkgs.python311;
         vllm = python.pkgs.callPackage ./vllm.nix {};
         functionary = python.pkgs.callPackage ./functionary.nix {};
       in {
