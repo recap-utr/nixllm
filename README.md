@@ -29,9 +29,3 @@ curl http://IP:50910/models/apply -H "Content-Type: application/json" -d '{"id":
 ```shell
 CUDA_VISIBLE_DEVICES=7 nix run .#functionary -- --port 50900 --device cuda
 ```
-
-### OpenChat
-
-```shell
-CUDA_VISIBLE_DEVICES=4,5,6,7 nix develop -c poetry run python -m ochat.serving.openai_api_server --model openchat/openchat_3.5 --engine-use-ray --worker-use-ray --tensor-parallel-size 4
-```
