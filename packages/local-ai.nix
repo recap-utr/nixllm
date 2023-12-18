@@ -3,20 +3,20 @@
   lib,
   stdenv,
   autoPatchelfHook,
+  avxVersion ? "avx512",
 }: let
   inherit (stdenv.hostPlatform) system;
   pname = "local-ai";
-  version = "1.40.0";
-  avxVersion = "avx512";
+  version = "2.1.0";
   repo = "https://github.com/mudler/LocalAI";
   srcs = {
     "x86_64-linux" = {
       url = "${repo}/releases/download/v${version}/${pname}-${avxVersion}-Linux-x86_64";
-      hash = "sha256-ITdEn96zy3P9GPikOujGb4/AzsESWVOn5c9vrh+LEgY=";
+      hash = "sha256-o77g4aFBXnw4/8F2jFob3G9FU1e+ltT0H6tvyZRhuY8=";
     };
     "x86_64-darwin" = {
       url = "${repo}/releases/download/v${version}/${pname}-${avxVersion}-Darwin-x86_64";
-      hash = "sha256-MRoiKFwAZEoKOf+nOMVl+75+ceSKrm1VnuwWK9n1/eY=";
+      hash = "sha256-0zd+XsEUvUstGJ9QnbhJoMbvhpU2sNVd9/qeupqUK9c=";
     };
   };
 in
