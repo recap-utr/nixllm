@@ -32,6 +32,7 @@
         llama-cpp = inputs.llama-cpp.packages.${system}.${llamacppAttr};
         python = pkgs.python311;
         functionary = python.pkgs.callPackage ./packages/functionary.nix {};
+        vllm = python.pkgs.callPackage ./packages/vllm.nix {};
       in {
         _module.args.pkgs = import nixpkgs {
           inherit system;
@@ -64,15 +65,24 @@
               '';
             };
           };
+          vllm = {
+            type = "app";
+            program = pkgs.writeShellApplication {
+              name = "vllm-app";
+              text = ''
+                export LD_LIBRARY_PATH=${lib.makeLibraryPath [pkgs.stdenv.cc.cc "/run/opengl-driver"]};
+                exec ${lib.getExe' self'.packages.functionary "python"} -m vllm.entrypoints.openai.api_server "$@"
+              '';
+            };
+          };
         };
         packages = {
           ollama = pkgs.callPackage ./packages/ollama.nix {};
           local-ai = pkgs.callPackage ./packages/local-ai.nix {};
           localai = self'.packages.local-ai;
           litellm = pkgs.callPackage ./packages/litellm.nix {};
-          functionary = pkgs.python3.withPackages (ps: [
-            functionary
-          ]);
+          functionary = pkgs.python3.withPackages (ps: [functionary]);
+          vllm = pkgs.python3.withPackages (ps: [vllm]);
           llama-cpp = pkgs.callPackage ./packages/llama-cpp-python.nix {
             inherit llama-cpp;
           };
