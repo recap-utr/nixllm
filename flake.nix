@@ -7,17 +7,12 @@
       url = "github:ggerganov/llama.cpp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixgl = {
-      url = "github:guibou/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs = inputs @ {
     self,
     nixpkgs,
     flake-parts,
     systems,
-    nixgl,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
@@ -44,7 +39,6 @@
             inherit cudaSupport;
             allowUnfree = true;
           };
-          overlays = [nixgl.overlay];
         };
         apps = {
           litellm = {
