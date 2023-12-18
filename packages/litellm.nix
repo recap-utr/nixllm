@@ -5,7 +5,7 @@
   python3Packages,
 }: let
   pname = "litellm";
-  version = "1.7.12";
+  version = "1.15.1";
 in
   python3Packages.buildPythonApplication {
     inherit pname version;
@@ -13,7 +13,7 @@ in
 
     src = fetchPypi {
       inherit pname version;
-      hash = "sha256-mpPAx2tNqDYnINlCVV6/A7A1ySIVVjnWIU+O0OmdxHo=";
+      hash = "sha256-ni+AIjvVJMwfh4+pZoe7M/1m5EUVMKAb6LpK3ZWoLyU=";
     };
 
     nativeBuildInputs = with python3Packages; [
@@ -38,10 +38,10 @@ in
       ++ (with python3Packages; [
         uvicorn
         fastapi
-        appdirs
         backoff
-        pyyaml
         rq
+        orjson
+        pyyaml
       ]);
 
     doCheck = false;
