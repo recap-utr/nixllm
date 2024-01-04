@@ -4,9 +4,8 @@
   stdenv,
   autoPatchelfHook,
 }: let
-  inherit (stdenv.hostPlatform) system;
   pname = "ollama";
-  version = "0.1.17";
+  version = "0.1.18";
   repo = "https://github.com/jmorganca/ollama";
   url = "${repo}/releases/download/v${version}/${pname}-linux-amd64";
 in
@@ -15,7 +14,7 @@ in
 
     src = fetchurl {
       inherit url;
-      hash = "sha256-t33uwWlqVJC7lCN4n/4nRxPG1ipnGc31Cxr9lR4jxws=";
+      hash = "sha256-Gicqph68SL6lr+3o2kDaEFEQ0F02LKQ61JEZhOoWukM=";
     };
 
     nativeBuildInputs = lib.optional stdenv.isLinux autoPatchelfHook;
