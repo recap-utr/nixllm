@@ -8,30 +8,15 @@
   pname = "ollama";
   version = "0.1.17";
   repo = "https://github.com/jmorganca/ollama";
-  srcs = rec {
-    x86_64-linux = {
-      url = "${repo}/releases/download/v${version}/${pname}-linux-amd64";
-      hash = "sha256-t33uwWlqVJC7lCN4n/4nRxPG1ipnGc31Cxr9lR4jxws=";
-    };
-    aarch64-linux = {
-      url = "${repo}/releases/download/v${version}/${pname}-linux-arm64";
-      hash = "sha256-HfzNeg9sfhKvEEIMndsE1UVU1jnOSK17VrY7LXCJc9A=";
-    };
-    x86_64-darwin = {
-      url = "${repo}/releases/download/v${version}/${pname}-darwin";
-      hash = "sha256-KeJabUn5Gxb/m79LUh13Qhm4g8+GJ23iuWeEzI7dIRk=";
-    };
-    aarch64-darwin = x86_64-darwin;
-  };
+  url = "${repo}/releases/download/v${version}/${pname}-linux-amd64";
 in
   stdenv.mkDerivation {
-    inherit pname version;
+    inherit pname version url;
 
-    passthru = {
-      inherit srcs;
+    src = fetchurl {
+      inherit url;
+      hash = "sha256-t33uwWlqVJC7lCN4n/4nRxPG1ipnGc31Cxr9lR4jxws=";
     };
-
-    src = fetchurl srcs.${system};
 
     nativeBuildInputs = lib.optional stdenv.isLinux autoPatchelfHook;
 
@@ -50,7 +35,7 @@ in
       downloadPage = "${repo}/releases";
       description = "Get up and running with Llama 2 and other large language models locally";
       mainProgram = pname;
-      platforms = builtins.attrNames srcs;
+      platforms = ["x86_64-linux"];
       license = lib.licenses.mit;
       changelog = "${repo}/releases/tag/v${version}";
     };

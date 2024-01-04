@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    systems.url = "github:nix-systems/default";
+    systems.url = "github:nix-systems/x86_64-linux";
     llama-cpp = {
       url = "github:ggerganov/llama.cpp";
       inputs.nixpkgs.follows = "nixpkgs";
