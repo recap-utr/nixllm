@@ -14,7 +14,7 @@ in
 
     src = fetchurl {
       inherit url;
-      hash = "sha256-Gicqph68SL6lr+3o2kDaEFEQ0F02LKQ61JEZhOoWukM=";
+      hash = "sha256-bEtjSCl520uvJhPuhsl4eSDAr8th3zm0n1YJxL/mTXc=";
     };
 
     nativeBuildInputs = lib.optional stdenv.isLinux autoPatchelfHook;
