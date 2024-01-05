@@ -1,0 +1,15 @@
+on:
+  pull_request:
+  push:
+    branches: [main, beta]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v9
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+      - run: nix flake check
+      - run: nix build .
