@@ -17,6 +17,10 @@ in
       hash = "sha256-bEtjSCl520uvJhPuhsl4eSDAr8th3zm0n1YJxL/mTXc=";
     };
 
+    buildInputs = [
+      stdenv.cc.cc
+    ];
+
     nativeBuildInputs = lib.optional stdenv.isLinux autoPatchelfHook;
 
     dontUnpack = true;
