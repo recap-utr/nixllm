@@ -1,27 +1,20 @@
 {
   fetchurl,
   lib,
-  stdenv,
-  autoPatchelfHook,
+  stdenvNoCC,
 }: let
   pname = "ollama";
   version = "0.1.18";
   repo = "https://github.com/jmorganca/ollama";
   url = "${repo}/releases/download/v${version}/${pname}-linux-amd64";
 in
-  stdenv.mkDerivation {
+  stdenvNoCC.mkDerivation {
     inherit pname version url;
 
     src = fetchurl {
       inherit url;
       hash = "sha256-bEtjSCl520uvJhPuhsl4eSDAr8th3zm0n1YJxL/mTXc=";
     };
-
-    buildInputs = [
-      stdenv.cc.cc
-    ];
-
-    nativeBuildInputs = lib.optional stdenv.isLinux autoPatchelfHook;
 
     dontUnpack = true;
     dontBuild = true;

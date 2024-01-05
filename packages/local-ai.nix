@@ -1,8 +1,7 @@
 {
   fetchurl,
   lib,
-  stdenv,
-  autoPatchelfHook,
+  stdenvNoCC,
   avxVersion ? "avx512",
 }: let
   pname = "local-ai";
@@ -10,15 +9,13 @@
   repo = "https://github.com/mudler/LocalAI";
   url = "${repo}/releases/download/v${version}/${pname}-${avxVersion}-Linux-x86_64";
 in
-  stdenv.mkDerivation {
+  stdenvNoCC.mkDerivation {
     inherit pname version url;
 
     src = fetchurl {
       inherit url;
       hash = "sha256-DY/Fq1cybD7p/AO11fOVEjT3sSgenrvG1e9So7C7aUE=";
     };
-
-    nativeBuildInputs = lib.optional stdenv.isLinux autoPatchelfHook;
 
     dontUnpack = true;
     dontBuild = true;

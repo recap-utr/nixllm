@@ -90,22 +90,6 @@
           llama-cpp = pkgs.callPackage ./packages/llama-cpp-python.nix {
             inherit llama-cpp;
           };
-          upload = pkgs.writeShellApplication {
-            name = "upload";
-            text = ''
-              exec ${lib.getExe pkgs.rsync} \
-                --progress \
-                --archive \
-                --delete \
-                --exclude-from ".gitignore" \
-                --exclude ".git" \
-                ./ \
-                wi2gpu:recap-utr/nixllm
-            '';
-          };
-        };
-        devShells.default = pkgs.mkShell {
-          packages = with self'.packages; [upload];
         };
       };
     };

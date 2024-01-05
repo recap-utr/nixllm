@@ -233,3 +233,4 @@ pyrightconfig.json
 /models/
 /.envrc
 /.direnv/
+/upload.sh
