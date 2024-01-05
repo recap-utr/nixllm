@@ -3,10 +3,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/x86_64-linux";
-    llama-cpp = {
-      url = "github:ggerganov/llama.cpp";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs = inputs @ {
     self,
@@ -24,20 +20,13 @@
         self',
         ...
       }: let
-        cudaSupport = system == "x86_64-linux";
-        llamacppAttr =
-          if cudaSupport
-          then "cuda"
-          else "default";
-        llama-cpp = inputs.llama-cpp.packages.${system}.${llamacppAttr};
         python = pkgs.python311;
-        functionary = python.pkgs.callPackage ./packages/functionary.nix {};
-        vllm = python.pkgs.callPackage ./packages/vllm.nix {};
+        functionaryPythonPackage = python.pkgs.callPackage ./packages/functionary.nix {};
       in {
         _module.args.pkgs = import nixpkgs {
           inherit system;
           config = {
-            inherit cudaSupport;
+            cudaSupport = true;
             allowUnfree = true;
           };
         };
@@ -59,19 +48,9 @@
               text = ''
                 export LD_LIBRARY_PATH=${lib.makeLibraryPath [pkgs.stdenv.cc.cc "/run/opengl-driver"]};
                 cd "$(mktemp -d)";
-                ln -s ${functionary.src}/functionary functionary;
+                ln -s ${functionaryPythonPackage.src}/functionary functionary;
                 cp ${./scripts/functionary_server.py} server.py;
                 exec ${lib.getExe' self'.packages.functionary "python"} server.py "$@"
-              '';
-            };
-          };
-          vllm = {
-            type = "app";
-            program = pkgs.writeShellApplication {
-              name = "vllm-app";
-              text = ''
-                export LD_LIBRARY_PATH=${lib.makeLibraryPath [pkgs.stdenv.cc.cc "/run/opengl-driver"]};
-                exec ${lib.getExe' self'.packages.functionary "python"} -m vllm.entrypoints.openai.api_server "$@"
               '';
             };
           };
@@ -85,11 +64,7 @@
           local-ai = pkgs.callPackage ./packages/local-ai.nix {};
           localai = self'.packages.local-ai;
           litellm = pkgs.callPackage ./packages/litellm.nix {};
-          functionary = pkgs.python3.withPackages (ps: [functionary]);
-          vllm = pkgs.python3.withPackages (ps: [vllm]);
-          llama-cpp = pkgs.callPackage ./packages/llama-cpp-python.nix {
-            inherit llama-cpp;
-          };
+          functionary = pkgs.python3.withPackages (ps: [functionaryPythonPackage]);
         };
       };
     };
