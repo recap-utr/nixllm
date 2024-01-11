@@ -4,7 +4,7 @@
   stdenvNoCC,
 }: let
   pname = "ollama";
-  version = "0.1.18";
+  version = "0.1.20";
   repo = "https://github.com/jmorganca/ollama";
   url = "${repo}/releases/download/v${version}/${pname}-linux-amd64";
 in
@@ -13,7 +13,7 @@ in
 
     src = fetchurl {
       inherit url;
-      hash = "sha256-bEtjSCl520uvJhPuhsl4eSDAr8th3zm0n1YJxL/mTXc=";
+      hash = "sha256-XR4lYh7k5yAtkUqwwjeZOnSdP+qarBk0XozWyD9uBaE=";
     };
 
     dontUnpack = true;

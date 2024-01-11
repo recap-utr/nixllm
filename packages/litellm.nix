@@ -5,7 +5,7 @@
   python3Packages,
 }: let
   pname = "litellm";
-  version = "1.16.12";
+  version = "1.17.1";
 in
   python3Packages.buildPythonApplication {
     inherit pname version;
@@ -13,7 +13,7 @@ in
 
     src = fetchPypi {
       inherit pname version;
-      hash = "sha256-jtzBUyB0eduAvOEnhZxjWpf9JI46BTayiEyghN90viA=";
+      hash = "sha256-UexIr72YFokUTtHLq4V595s2+l5bN5OcGx6S9YqhxSs=";
     };
 
     nativeBuildInputs = with python3Packages; [
@@ -31,12 +31,12 @@ in
         tokenizers
         click
         jinja2
-        certifi
         aiohttp
       ])
       # proxy
       ++ (with python3Packages; [
         uvicorn
+        gunicorn
         fastapi
         backoff
         pyyaml
