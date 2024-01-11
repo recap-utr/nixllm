@@ -56,15 +56,14 @@
           };
         };
         packages = {
-          default = pkgs.symlinkJoin {
-            name = "nixllm";
-            paths = with self'.packages; [ollama localai litellm];
-          };
           ollama = pkgs.callPackage ./packages/ollama.nix {};
           local-ai = pkgs.callPackage ./packages/local-ai.nix {};
           localai = self'.packages.local-ai;
           litellm = pkgs.callPackage ./packages/litellm.nix {};
           functionary = pkgs.python3.withPackages (ps: [functionaryPythonPackage]);
+        };
+        checks = {
+          inherit (self'.packages) ollama localai litellm;
         };
       };
     };
