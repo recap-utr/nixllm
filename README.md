@@ -5,7 +5,7 @@ Nix wrapper for running LLMs behind an OpenAI-compatible API proxy.
 > [!important]
 > This project is not designed to be used on NixOS, we do not use `patchelf` since that caused issues with the CUDA runtime.
 > Instead, it is intended to be used with the `nix` package manager on other Linux distributions like Ubuntu.
-> On these distributions, the dynamic libraries are already in the correct location, so there is no need to patch them.
+> You may use it together with [`nix-ld`](https://github.com/Mic92/nix-ld) on NixOS.
 
 ## Usage
 
