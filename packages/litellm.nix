@@ -5,7 +5,7 @@
   python3Packages,
 }: let
   pname = "litellm";
-  version = "1.17.1";
+  version = "1.18.4";
 in
   python3Packages.buildPythonApplication {
     inherit pname version;
@@ -13,7 +13,7 @@ in
 
     src = fetchPypi {
       inherit pname version;
-      hash = "sha256-UexIr72YFokUTtHLq4V595s2+l5bN5OcGx6S9YqhxSs=";
+      hash = "sha256-l5l8sQEXrcS4/Ek7hjJXrMjFqsrrLSCds/h8nECzW0g=";
     };
 
     nativeBuildInputs = with python3Packages; [
@@ -24,6 +24,7 @@ in
     propagatedBuildInputs =
       # base
       (with python3Packages; [
+        setuptools
         openai
         python-dotenv
         tiktoken
@@ -32,6 +33,7 @@ in
         click
         jinja2
         aiohttp
+        requests
       ])
       # proxy
       ++ (with python3Packages; [
@@ -42,6 +44,7 @@ in
         pyyaml
         rq
         orjson
+        streamlit
       ]);
 
     doCheck = false;
