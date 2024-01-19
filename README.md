@@ -26,5 +26,5 @@ CUDA_VISIBLE_DEVICES=7 OLLAMA_HOST=0.0.0.0:6060 nix run github:recap-utr/nixllm#
 ```shell
 CUDA_VISIBLE_DEVICES=7 nix run github:recap-utr/nixllm#localai -- --address=0.0.0.0:6060 --galleries='[{"name":"nixllm","url":"file://local-ai/gallery.yaml"}]'
 # download models for the first time
-curl http://IP:50910/models/apply -H "Content-Type: application/json" -d '{"id": "nixllm@llama2-13b"}'
+curl http://IP:6060/models/apply -H "Content-Type: application/json" -d '{"id": "nixllm@llama2-13b"}'
 ```
