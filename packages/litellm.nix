@@ -6,7 +6,7 @@
   ollama,
 }: let
   pname = "litellm";
-  version = "1.18.4";
+  version = "1.18.13";
 in
   python3Packages.buildPythonApplication {
     inherit pname version;
@@ -14,7 +14,7 @@ in
 
     src = fetchPypi {
       inherit pname version;
-      hash = "sha256-l5l8sQEXrcS4/Ek7hjJXrMjFqsrrLSCds/h8nECzW0g=";
+      hash = "sha256-DcwcYyqlk+Is1c009PNJ0oQb3EqDJ9vj7cjhiCUWQzA=";
     };
 
     nativeBuildInputs = with python3Packages; [
@@ -46,6 +46,7 @@ in
         pyyaml
         rq
         orjson
+        apscheduler
         streamlit
       ]);
 
