@@ -21,11 +21,11 @@ in
       poetry-core
     ];
 
-    # https://github.com/BerriAI/litellm/blob/main/pyproject.toml
     propagatedBuildInputs =
       [ollama]
-      # base
+      # https://github.com/BerriAI/litellm/blob/main/pyproject.toml
       ++ (with python3Packages; [
+        # base
         setuptools
         openai
         python-dotenv
@@ -36,9 +36,7 @@ in
         jinja2
         aiohttp
         requests
-      ])
-      # proxy
-      ++ (with python3Packages; [
+        # proxy
         uvicorn
         gunicorn
         fastapi
