@@ -35,9 +35,7 @@
             ollama = self'.packages.ollama;
           };
         };
-        checks = {
-          inherit (self'.packages) ollama localai litellm;
-        };
+        checks = self'.packages;
       };
     };
 }
