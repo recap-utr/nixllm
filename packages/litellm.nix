@@ -47,7 +47,6 @@ in
         rq
         orjson
         apscheduler
-        streamlit
       ]);
 
     doCheck = false;
