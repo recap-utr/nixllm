@@ -12,19 +12,19 @@ Nix wrapper for running LLMs behind an OpenAI-compatible API proxy.
 ### LiteLLM with Ollama
 
 ```shell
-CUDA_VISIBLE_DEVICES=7 nix run github:recap-utr/nixllm#litellm -- --model ollama/llama2:13b --port 6060 --num_workers 4 --add_function_to_prompt
+CUDA_VISIBLE_DEVICES=0 nix run github:recap-utr/nixllm#litellm -- --model ollama/llama2:13b --port 6060 --num_workers 4 --add_function_to_prompt
 ```
 
 ### Ollama Standalone
 
 ```shell
-CUDA_VISIBLE_DEVICES=7 OLLAMA_HOST=0.0.0.0:6060 nix run github:recap-utr/nixllm#ollama -- serve
+CUDA_VISIBLE_DEVICES=0 OLLAMA_HOST=0.0.0.0:6060 nix run github:recap-utr/nixllm#ollama -- serve
 ```
 
 ### LocalAI
 
 ```shell
-CUDA_VISIBLE_DEVICES=7 nix run github:recap-utr/nixllm#localai -- --address=0.0.0.0:6060 --galleries='[{"name":"nixllm","url":"file://local-ai/gallery.yaml"}]'
+CUDA_VISIBLE_DEVICES=0 nix run github:recap-utr/nixllm#localai -- --address=0.0.0.0:6060 --galleries='[{"name":"nixllm","url":"github:recap-utr/nixllm/local-ai/gallery.yaml"}]'
 # download models for the first time
 curl http://IP:6060/models/apply -H "Content-Type: application/json" -d '{"id": "nixllm@llama2-13b"}'
 ```
