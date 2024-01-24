@@ -9,13 +9,11 @@
     nixpkgs,
     flake-parts,
     systems,
-    ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = import systems;
       perSystem = {
         pkgs,
-        lib,
         system,
         self',
         ...
