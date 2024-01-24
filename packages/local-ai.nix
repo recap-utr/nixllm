@@ -5,7 +5,7 @@
   avxVersion ? "avx512",
 }: let
   pname = "local-ai";
-  version = "2.5.1";
+  version = "2.6.1";
   repo = "https://github.com/mudler/LocalAI";
   url = "${repo}/releases/download/v${version}/${pname}-${avxVersion}-Linux-x86_64";
 in
@@ -14,7 +14,7 @@ in
 
     src = fetchurl {
       inherit url;
-      hash = "sha256-a87QsIbiC2f/ZjVnMnyM60YrwhKFUxzrzLDCMVn62y4=";
+      hash = "sha256-K/l+tTD6VC2enhM7IQa1eONzSY3V2W10NrXCPECBYas=";
     };
 
     dontUnpack = true;
