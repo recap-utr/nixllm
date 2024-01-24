@@ -19,9 +19,7 @@
         system,
         self',
         ...
-      }: let
-        python = pkgs.python311;
-      in {
+      }: {
         _module.args.pkgs = import nixpkgs {
           inherit system;
           config = {
@@ -29,23 +27,13 @@
             allowUnfree = true;
           };
         };
-        apps = {
-          litellm = {
-            type = "app";
-            program = pkgs.writeShellApplication {
-              name = "litellm-app";
-              runtimeInputs = with self'.packages; [ollama];
-              text = ''
-                exec ${lib.getExe self'.packages.litellm} "$@"
-              '';
-            };
-          };
-        };
         packages = {
           ollama = pkgs.callPackage ./packages/ollama.nix {};
           local-ai = pkgs.callPackage ./packages/local-ai.nix {};
           localai = self'.packages.local-ai;
-          litellm = pkgs.callPackage ./packages/litellm.nix {};
+          litellm = pkgs.callPackage ./packages/litellm.nix {
+            ollama = self'.packages.ollama;
+          };
         };
         checks = {
           inherit (self'.packages) ollama localai litellm;

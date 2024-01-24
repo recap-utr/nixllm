@@ -3,6 +3,7 @@
   lib,
   fetchPypi,
   python3Packages,
+  ollama,
 }: let
   pname = "litellm";
   version = "1.18.4";
@@ -22,8 +23,9 @@ in
 
     # https://github.com/BerriAI/litellm/blob/main/pyproject.toml
     propagatedBuildInputs =
+      [ollama]
       # base
-      (with python3Packages; [
+      ++ (with python3Packages; [
         setuptools
         openai
         python-dotenv
