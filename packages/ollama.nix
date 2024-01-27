@@ -4,8 +4,8 @@
   stdenvNoCC,
 }: let
   pname = "ollama";
-  version = "0.1.20";
-  repo = "https://github.com/jmorganca/ollama";
+  version = "0.1.22";
+  repo = "https://github.com/ollama/ollama";
   url = "${repo}/releases/download/v${version}/${pname}-linux-amd64";
 in
   stdenvNoCC.mkDerivation {
@@ -13,7 +13,7 @@ in
 
     src = fetchurl {
       inherit url;
-      hash = "sha256-XR4lYh7k5yAtkUqwwjeZOnSdP+qarBk0XozWyD9uBaE=";
+      hash = "sha256-s9ydP/pemUrdq3oZKoWYBbbFYLDj2ZzsSwU97MuGMvA=";
     };
 
     dontUnpack = true;
