@@ -3,7 +3,6 @@
   lib,
   fetchPypi,
   python3Packages,
-  ollama,
 }:
 let
   pname = "litellm";
@@ -20,34 +19,32 @@ python3Packages.buildPythonApplication {
 
   nativeBuildInputs = with python3Packages; [ poetry-core ];
 
-  propagatedBuildInputs =
-    [ ollama ]
-    # https://github.com/BerriAI/litellm/blob/main/pyproject.toml
-    ++ (with python3Packages; [
-      # base
-      setuptools
-      openai
-      python-dotenv
-      tiktoken
-      importlib-metadata
-      tokenizers
-      click
-      jinja2
-      aiohttp
-      requests
-      # proxy
-      uvicorn
-      gunicorn
-      fastapi
-      backoff
-      pyyaml
-      rq
-      orjson
-      apscheduler
-      # fastapi-sso
-      pyjwt
-      python-multipart
-    ]);
+  # https://github.com/BerriAI/litellm/blob/main/pyproject.toml
+  propagatedBuildInputs = with python3Packages; [
+    # base
+    setuptools
+    openai
+    python-dotenv
+    tiktoken
+    importlib-metadata
+    tokenizers
+    click
+    jinja2
+    aiohttp
+    requests
+    # proxy
+    uvicorn
+    gunicorn
+    fastapi
+    backoff
+    pyyaml
+    rq
+    orjson
+    apscheduler
+    # fastapi-sso
+    pyjwt
+    python-multipart
+  ];
 
   doCheck = false;
 
