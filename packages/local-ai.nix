@@ -6,7 +6,7 @@
 }:
 let
   pname = "local-ai";
-  version = "2.6.1";
+  version = "2.7.0";
   repo = "https://github.com/mudler/LocalAI";
   url = "${repo}/releases/download/v${version}/${pname}-${avxVersion}-Linux-x86_64";
 in
@@ -15,7 +15,7 @@ stdenvNoCC.mkDerivation {
 
   src = fetchurl {
     inherit url;
-    hash = "sha256-K/l+tTD6VC2enhM7IQa1eONzSY3V2W10NrXCPECBYas=";
+    hash = "sha256-Lui4eLtbWQEdthoVR+5MoeWe25rEmdhKW1kkETR/4wU=";
   };
 
   dontUnpack = true;
