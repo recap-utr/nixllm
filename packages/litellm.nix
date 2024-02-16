@@ -6,7 +6,7 @@
 }:
 let
   pname = "litellm";
-  version = "1.22.11";
+  version = "1.23.16";
 in
 python3Packages.buildPythonApplication {
   inherit pname version;
@@ -14,7 +14,7 @@ python3Packages.buildPythonApplication {
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-qHTMxRePQta5JH3fetm5CIQmqGPwF5nZKejSZdjB7KQ=";
+    hash = "sha256-fUd8hWB0PMdi8eYfwsIJ/6nXM4edoZja610O/7tiocE=";
   };
 
   nativeBuildInputs = with python3Packages; [ poetry-core ];
@@ -41,7 +41,6 @@ python3Packages.buildPythonApplication {
     rq
     orjson
     apscheduler
-    # fastapi-sso
     pyjwt
     python-multipart
   ];

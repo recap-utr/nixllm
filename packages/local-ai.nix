@@ -6,16 +6,14 @@
 }:
 let
   pname = "local-ai";
-  version = "2.7.0";
-  repo = "https://github.com/mudler/LocalAI";
-  url = "${repo}/releases/download/v${version}/${pname}-${avxVersion}-Linux-x86_64";
+  version = "2.8.2";
 in
 stdenvNoCC.mkDerivation {
-  inherit pname version url;
+  inherit pname version;
 
   src = fetchurl {
-    inherit url;
-    hash = "sha256-Lui4eLtbWQEdthoVR+5MoeWe25rEmdhKW1kkETR/4wU=";
+    url = "https://github.com/mudler/LocalAI/releases/download/v${version}/${pname}-${avxVersion}-Linux-x86_64";
+    hash = "sha256-NehL91R6u9BQqH7R3UdBBPcR0gpYTIAAa3KCmWeshoc=";
   };
 
   dontUnpack = true;
@@ -30,11 +28,11 @@ stdenvNoCC.mkDerivation {
 
   meta = {
     homepage = "https://localai.io/";
-    downloadPage = "${repo}/releases";
+    downloadPage = "https://github.com/mudler/LocalAI/releases";
     description = "Get up and running with Llama 2 and other large language models locally";
     mainProgram = pname;
     platforms = [ "x86_64-linux" ];
     license = lib.licenses.mit;
-    changelog = "${repo}/releases/tag/v${version}";
+    changelog = "https://github.com/mudler/LocalAI/releases/tag/v${version}";
   };
 }
