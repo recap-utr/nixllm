@@ -6,14 +6,14 @@
 }:
 let
   pname = "local-ai";
-  version = "2.8.2";
+  version = "2.9.0";
 in
 stdenvNoCC.mkDerivation {
   inherit pname version;
 
   src = fetchurl {
     url = "https://github.com/mudler/LocalAI/releases/download/v${version}/${pname}-${avxVersion}-Linux-x86_64";
-    hash = "sha256-NehL91R6u9BQqH7R3UdBBPcR0gpYTIAAa3KCmWeshoc=";
+    hash = "sha256-/L0WFKEXXGsJC2ZRAzlfnxzyE5LQmmKS0L9NOwKGZOo=";
   };
 
   dontUnpack = true;

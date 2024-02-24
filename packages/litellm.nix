@@ -6,7 +6,7 @@
 }:
 let
   pname = "litellm";
-  version = "1.23.16";
+  version = "1.26.13";
 in
 python3Packages.buildPythonApplication {
   inherit pname version;
@@ -14,7 +14,7 @@ python3Packages.buildPythonApplication {
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-fUd8hWB0PMdi8eYfwsIJ/6nXM4edoZja610O/7tiocE=";
+    hash = "sha256-4rBG4aotZkSB7AtxmfBECGfUXMCfxloJ/7poa6d2Txo=";
   };
 
   nativeBuildInputs = with python3Packages; [ poetry-core ];

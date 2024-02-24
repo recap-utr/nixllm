@@ -5,14 +5,14 @@
 }:
 let
   pname = "ollama";
-  version = "0.1.25";
+  version = "0.1.27";
 in
 stdenvNoCC.mkDerivation {
   inherit pname version;
 
   src = fetchurl {
     url = "https://github.com/ollama/ollama/releases/download/v${version}/${pname}-linux-amd64";
-    hash = "sha256-8AM40zA1686KUoUDKOIhj5pJFsi3aXiqtGdlFdoyp0w=";
+    hash = "sha256-ptotswa6QcCVp0fmNiEwL+gp3CGpyY24wC+d+mqlPm4=";
   };
 
   dontUnpack = true;
