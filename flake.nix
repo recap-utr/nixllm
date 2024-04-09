@@ -32,7 +32,6 @@
             ollama = pkgs.callPackage ./packages/ollama.nix { };
             local-ai = pkgs.callPackage ./packages/local-ai.nix { };
             localai = self'.packages.local-ai;
-            litellm = pkgs.callPackage ./packages/litellm.nix { };
           };
           checks = self'.packages;
         };

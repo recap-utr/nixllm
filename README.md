@@ -19,13 +19,7 @@ nix run github:recap-utr/nixllm#ollama -- pull MODEL_NAME
 CUDA_VISIBLE_DEVICES=0 OLLAMA_HOST=0.0.0.0:6060 nix run github:recap-utr/nixllm#ollama -- serve
 ```
 
-### LiteLLM (pure proxy without built-in models)
-
-```shell
-CUDA_VISIBLE_DEVICES=0 nix run github:recap-utr/nixllm#litellm -- --model MODEL_NAME --api_base UPSTREAM_SERVER --port 6060 --num_workers 4 --add_function_to_prompt
-```
-
-### LocalAI (advanced)
+### LocalAI
 
 ```shell
 CUDA_VISIBLE_DEVICES=0 nix run github:recap-utr/nixllm#local-ai -- --address=0.0.0.0:6060 --galleries='[{"name":"nixllm","url":"github:recap-utr/nixllm/local-ai/gallery.yaml"}]'
