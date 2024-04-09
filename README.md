@@ -10,7 +10,7 @@ Nix wrapper for running LLMs behind an OpenAI-compatible API proxy.
 ## Ollama Usage
 
 ```shell
-# make sure to pull the models first
-nix run github:recap-utr/nixllm#ollama -- pull MODEL_NAME
 CUDA_VISIBLE_DEVICES=0 OLLAMA_HOST=0.0.0.0:6060 nix run github:recap-utr/nixllm#ollama -- serve
+# then, in another terminal pull the models before performing API requests
+OLLAMA_HOST=0.0.0.0:6060 nix run github:recap-utr/nixllm#ollama -- pull MODEL_NAME
 ```
