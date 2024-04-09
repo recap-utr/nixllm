@@ -7,22 +7,10 @@ Nix wrapper for running LLMs behind an OpenAI-compatible API proxy.
 > Instead, it is intended to be used with the `nix` package manager on other Linux distributions like Ubuntu.
 > You may use it together with [`nix-ld`](https://github.com/Mic92/nix-ld) on NixOS.
 
-## Usage
-
-All of the following methods expose an OpenAI-compatible API on `0.0.0.0:6060`.
-
-### Ollama (recommended)
+## Ollama Usage
 
 ```shell
 # make sure to pull the models first
 nix run github:recap-utr/nixllm#ollama -- pull MODEL_NAME
 CUDA_VISIBLE_DEVICES=0 OLLAMA_HOST=0.0.0.0:6060 nix run github:recap-utr/nixllm#ollama -- serve
-```
-
-### LocalAI
-
-```shell
-CUDA_VISIBLE_DEVICES=0 nix run github:recap-utr/nixllm#local-ai -- --address=0.0.0.0:6060 --galleries='[{"name":"nixllm","url":"github:recap-utr/nixllm/local-ai/gallery.yaml"}]'
-# download models for the first time
-curl http://IP:6060/models/apply -H "Content-Type: application/json" -d '{"id": "nixllm@llama2-13b"}'
 ```
